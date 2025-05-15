@@ -44,3 +44,17 @@ def page_not_found(request):
 
 def success(request):
     return render(request, 'product_success.html')
+
+def hard_delete_product(request, product_id):
+    if request.method == 'GET':
+        Product.hard_delete_product(product_id)
+        return render(request, 'product_success.html')
+    else:
+        return render(request, 'product_success.html')
+
+def soft_delete_product(request, product_id):
+    if request.method == 'GET':
+        Product.soft_delete_product(product_id)
+        return render(request, 'product_success.html')
+    else:
+        return render(request, 'product_success.html')

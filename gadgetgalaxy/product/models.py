@@ -9,10 +9,11 @@ class Product(models.Model):
     sku = models.CharField(max_length=50, unique=True)
     category = models.ForeignKey('category.Category', on_delete=models.CASCADE)
     date_added = models.DateTimeField(auto_now_add=True)
+    is_deleted = models.BooleanField(default=False)
 
     @classmethod
     def get_all_products(cls):
-        return cls.objects.all()
+        return cls.objects.filter(is_deleted=False)
 
     @classmethod
     def get_products_by_category(cls, category_id):
@@ -23,6 +24,12 @@ class Product(models.Model):
         return cls.objects.create(**arg)
 
     @classmethod
-    def delte_product(cls, product_id):
+    def hard_delete_product(cls, product_id):
         product = cls.objects.get(id=product_id)
         product.delete()
+
+    @classmethod
+    def soft_delete_product(cls, product_id):
+        product = cls.objects.get(id=product_id)
+        product.is_deleted = True
+        product.save()

@@ -13,11 +13,11 @@
                         <p class="card-text">Price: ${{ product.price }}</p>
                         <p class="card-text">Description: {{ product.description }}</p>
                         <p class="card-text">Stock: {{product.stock}}</p>
-                        <div>
+
                             <a class="btn btn-primary">update</a>
-                            <a class="btn btn-danger">hard delete</a>
-                            <a class="btn btn-warning">soft delete</a>
-                        </div>
+                            <a class="btn btn-danger" href="{%url 'hard_delete_product' product.id%}">hard delete</a>
+                            <a class="btn btn-warning" href="{%url 'soft_delete_product' product.id%}">soft delete</a>
+
                     </div>
 
                 </div>
