@@ -1,5 +1,5 @@
 from django.db import models
-# Create your models here.
+
 class Product(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
@@ -7,5 +7,22 @@ class Product(models.Model):
     stock = models.IntegerField()
     image = models.ImageField(upload_to='products/')
     sku = models.CharField(max_length=50, unique=True)
-    category = models.ForeignKey('category.category', on_delete=models.CASCADE)
+    category = models.ForeignKey('category.Category', on_delete=models.CASCADE)
     date_added = models.DateTimeField(auto_now_add=True)
+
+    @classmethod
+    def get_all_products(cls):
+        return cls.objects.all()
+
+    @classmethod
+    def get_products_by_category(cls, category_id):
+        return cls.objects.filter(category_id=category_id)
+
+    @classmethod
+    def create_product(cls, **arg):
+        return cls.objects.create(**arg)
+
+    @classmethod
+    def delte_product(cls, product_id):
+        product = cls.objects.get(id=product_id)
+        product.delete()

@@ -4,3 +4,6 @@ from django.db import models
 class Category(models.Model):
     name = models.CharField(max_length=100)
 
+    @classmethod
+    def get_all_categories(cls):
+        return cls.objects.all()
