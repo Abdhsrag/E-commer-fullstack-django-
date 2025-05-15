@@ -12,11 +12,11 @@ def product_list(request):
 
 def add_product(request):
     if request.method == 'POST':
-        name = request.POST['name']
-        description = request.POST['description']
-        price = request.POST['price']
-        stock = request.POST['stock']
-        image = request.FILES['image']
+        name = request.POST['product_name']
+        description = request.POST['product_desc']
+        price = request.POST['product_price']
+        stock = request.POST['product_stock']
+        image = request.FILES['product_image']
         sku = request.POST['sku']
         category = request.POST['category']
         product = Product(
