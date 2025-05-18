@@ -7,3 +7,6 @@ class Category(models.Model):
     @classmethod
     def get_all_categories(cls):
         return cls.objects.all()
+
+    def __str__(self):
+        return self.name

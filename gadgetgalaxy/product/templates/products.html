@@ -1,4 +1,6 @@
 {% extends 'index.html'%}
+{% load static %}
+{% load django_bootstrap5 %}
 {% block title %}Products{% endblock %}
 {% block content %}
 <h2>Products</h2>
@@ -14,10 +16,9 @@
                         <p class="card-text">Description: {{ product.description }}</p>
                         <p class="card-text">Stock: {{product.stock}}</p>
 
-                            <a class="btn btn-primary">update</a>
+                            <a class="btn btn-primary" href="{%url 'update_product' product.id%}" target="_blank">update</a>
                             <a class="btn btn-danger" href="{%url 'hard_delete_product' product.id%}">hard delete</a>
                             <a class="btn btn-warning" href="{%url 'soft_delete_product' product.id%}">soft delete</a>
-
                     </div>
 
                 </div>

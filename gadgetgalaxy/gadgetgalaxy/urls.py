@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from product.views import product_list, index
+from product.views import product_list_view, index
 from django.conf import settings
 from django.conf.urls.static import static
 

@@ -2,14 +2,20 @@ from django.shortcuts import render, redirect
 from .models import Product
 from .forms import ProductForm
 from category.models import Category
+from django.views import View
 
 # Create your views here.
+class product_list_view(View):
+    def get(self, request):
+        products = Product.get_all_products()
+        return render(request, 'products.html', {'products': products})
+
 def index(request):
     return render(request, 'index.html')
 
-def product_list(request):
-    products = Product.get_all_products()
-    return render(request, 'products.html', {'products': products})
+# def product_list(request):
+#     products = Product.get_all_products()
+#     return render(request, 'products.html', {'products': products})
 
 from django.db import IntegrityError
 
@@ -73,3 +79,16 @@ def soft_delete_product(request, product_id):
         return render(request, 'product_success.html')
     else:
         return render(request, 'product_success.html')
+
+def update_product(request, product_id):
+    product = Product.objects.get(id=product_id)
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES, instance=product)
+        if form.is_bound and form.is_valid():
+            form.save()
+            return render(request, 'product_success.html')
+        else:
+            return render(request, 'update_product.html', {'form': form})
+    else:
+        form = ProductForm(instance=product)
+        return render(request, 'update_product.html', {'form': form})
