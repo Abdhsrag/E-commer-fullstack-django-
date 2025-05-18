@@ -5,7 +5,7 @@ from category.models import Category
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ['name', 'description', 'price', 'stock', 'image', 'category']
+        fields = ['name', 'description', 'price', 'stock', 'image', 'sku','category']
 
 class updateProductForm(forms.Form):
     name = forms.CharField(max_length=100, required=True)
