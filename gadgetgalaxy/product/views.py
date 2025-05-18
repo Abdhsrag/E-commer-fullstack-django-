@@ -73,22 +73,31 @@ def hard_delete_product(request, product_id):
     else:
         return render(request, 'product_success.html')
 
-def soft_delete_product(request, product_id):
-    if request.method == 'GET':
+class soft_delete_product(View):
+    def get(self, request, product_id):
         Product.soft_delete_product(product_id)
         return render(request, 'product_success.html')
-    else:
+
+    def post(self, request, product_id):
+        Product.soft_delete_product(product_id)
         return render(request, 'product_success.html')
+
+# def soft_delete_product(request, product_id):
+#     if request.method == 'GET':
+#         Product.soft_delete_product(product_id)
+#         return render(request, 'product_success.html')
+#     else:
+#         return render(request, 'product_success.html')
 
 def update_product(request, product_id):
     product = Product.objects.get(id=product_id)
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES, instance=product)
-        if form.is_bound and form.is_valid():
+        if form.is_valid():
             form.save()
             return render(request, 'product_success.html')
         else:
-            return render(request, 'update_product.html', {'form': form})
+            return render(request, 'update_product.html', {'form': form, 'product': product})
     else:
         form = ProductForm(instance=product)
-        return render(request, 'update_product.html', {'form': form})
+        return render(request, 'update_product.html', {'form': form, 'product': product})
