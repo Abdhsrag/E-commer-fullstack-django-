@@ -78,10 +78,6 @@ class soft_delete_product(View):
         Product.soft_delete_product(product_id)
         return render(request, 'product_success.html')
 
-    def post(self, request, product_id):
-        Product.soft_delete_product(product_id)
-        return render(request, 'product_success.html')
-
 # def soft_delete_product(request, product_id):
 #     if request.method == 'GET':
 #         Product.soft_delete_product(product_id)
