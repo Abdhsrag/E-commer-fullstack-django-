@@ -12,7 +12,15 @@
                     <img src="{{ cat.image.url }}" class="card-img-top" alt="{{ cat.name }}">
                     <div class="card-body">
                         <h3 class="card-title">{{ cat.name }}</h3>
-
+                        <input type="button" class="btn btn-primary" value="Update" onclick="location.href='{% url 'category-edit' cat.pk %}'">
+                        <form method="POST" action="{% url 'category-delete' cat.pk %}" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                        <form method="GET" action="{% url 'category-detail' cat.pk %}" style="display:inline;">
+                            {% csrf_token %}
+                            <input type="button" class="btn btn-secondary" value="View Products" onclick="location.href='{% url 'category-detail' cat.pk %}'">
+                        </form>
                     </div>
 
                 </div>

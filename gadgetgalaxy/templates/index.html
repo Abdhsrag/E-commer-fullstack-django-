@@ -37,10 +37,16 @@
               >
             </li>
             <li class="nav-item">
+              <a class="nav-link items category" href="{% url 'category-list' %}">Categories</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link items product" href="{% url 'product_list' %}">Products</a>
             </li>
             <li class="nav-item">
               <a class="nav-link items product" href="{% url 'add_product' %}">Add Products</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link items category" href="{% url 'category-add' %}">Add Categories</a>
             </li>
           </ul>
         </div>

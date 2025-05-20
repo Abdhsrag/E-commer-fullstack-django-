@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.urls import reverse_lazy
 from .models import Category
+from product.models import Product
 
 # Create your views here.
 
@@ -12,13 +13,13 @@ class CategoryListView(ListView):
 
 class CategoryCreateView(CreateView):
     model = Category
-    fields = ['name']
+    fields = ['name', 'image']
     template_name = 'category_form.html'
     success_url = reverse_lazy('category-list')
 
 class CategoryUpdateView(UpdateView):
     model = Category
-    fields = ['name']
+    fields = ['name', 'image']
     template_name = 'category_form.html'
     success_url = reverse_lazy('category-list')
 
@@ -31,3 +32,4 @@ class CategoryDetailView(DetailView):
     model = Category
     template_name = 'category_detail.html'
     context_object_name = 'category'
+
