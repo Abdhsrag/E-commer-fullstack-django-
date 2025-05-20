@@ -3,13 +3,14 @@ from .models import Product
 from .forms import ProductForm
 from category.models import Category
 from django.views import View
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 class product_list_view(View):
     def get(self, request):
         products = Product.get_all_products()
         return render(request, 'products.html', {'products': products})
-
+@login_required
 def index(request):
     return render(request, 'index.html')
 
@@ -18,7 +19,7 @@ def index(request):
 #     return render(request, 'products.html', {'products': products})
 
 from django.db import IntegrityError
-
+@login_required
 def add_product(request):
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
@@ -59,13 +60,15 @@ def add_product(request):
 #     else:
 #         categories = Category.get_all_categories()
 #         return render(request, 'add_products.html', {'categories': categories})
-
+@login_required
 def page_not_found(request):
     return render(request, 'notfound.html', status=404)
 
+@login_required
 def success(request):
     return render(request, 'product_success.html')
 
+@login_required
 def hard_delete_product(request, product_id):
     if request.method == 'GET':
         Product.hard_delete_product(product_id)
@@ -85,6 +88,7 @@ class soft_delete_product(View):
 #     else:
 #         return render(request, 'product_success.html')
 
+@login_required
 def update_product(request, product_id):
     product = Product.objects.get(id=product_id)
     if request.method == 'POST':
