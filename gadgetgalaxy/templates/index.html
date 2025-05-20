@@ -12,6 +12,7 @@
 <body>
     <header id="head">
         <h1>Gadget Galaxy</h1>
+        {% if user.is_authenticated and '/accounts/login/' not in request.path and '/accounts/register/' not in request.path %}
         <nav class="navbar navbar-expand-lg sticky-top shadow p-3">
       <div class="container-fluid">
         <a class="navbar-brand ms-5 logo" href="#">Gadget Galaxy</a>
@@ -52,6 +53,7 @@
         </div>
       </div>
     </nav>
+        {%endif%}
     </header>
     <main class="text-center d-flex flex-column justify-content-center align-items-center my-5">
         {% block content %}
