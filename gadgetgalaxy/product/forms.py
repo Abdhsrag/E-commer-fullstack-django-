@@ -7,6 +7,10 @@ class ProductForm(forms.ModelForm):
         model = Product
         fields = ['name', 'description', 'price', 'stock', 'image', 'sku','category']
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['category'].queryset = Category.get_all_categories()
+
 class updateProductForm(forms.Form):
     name = forms.CharField(max_length=100, required=True)
     description = forms.CharField(widget=forms.Textarea, required=False)
