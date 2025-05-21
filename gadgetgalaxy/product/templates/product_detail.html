@@ -1,0 +1,35 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+
+{% block title %}{{ product.name }} - Details{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+    <div class="card shadow-sm" style="max-width: 800px; margin: auto;">
+        <div class="row g-0">
+            <div class="col-md-5">
+                <div class="p-3">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid rounded" style="object-fit: cover; height: 300px; width: 100%;">
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="card-body p-4">
+                    <h2 class="card-title h3 mb-3">{{ product.name }}</h2>
+                    <div class="mb-4">
+                        <span class="badge bg-primary fs-5">${{ product.price }}</span>
+                    </div>
+                    <div class="mb-3">
+                        <h6 class="text-muted mb-2">Description</h6>
+                        <p class="card-text">{{ product.description }}</p>
+                    </div>
+                    <div class="mt-auto">
+                        <h6 class="text-muted mb-2">Category</h6>
+                        <span class="badge bg-secondary">{{ product.category.name }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
