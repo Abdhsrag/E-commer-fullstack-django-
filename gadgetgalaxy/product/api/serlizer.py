@@ -15,6 +15,8 @@ class ProductSerializer(serializers.Serializer):
     stock = serializers.IntegerField()
     created_at = serializers.DateTimeField(read_only=True)
     updated_at = serializers.DateTimeField(read_only=True)
+    is_deleted = serializers.BooleanField(default=True)
+    image = serializers.ImageField()
     category_id = serializers.IntegerField(write_only=True)
 
     def create(self, validated_data):
