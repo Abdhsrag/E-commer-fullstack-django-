@@ -16,8 +16,9 @@ class ProductSerializer(serializers.Serializer):
     price = serializers.DecimalField(max_digits=10, decimal_places=2)
     stock = serializers.IntegerField()
     date_added = serializers.DateTimeField(read_only=True)
-    is_deleted = serializers.BooleanField(default=True)
+    is_deleted = serializers.BooleanField(default=False)
     image = serializers.ImageField()
+    sku = serializers.CharField(max_length=50)
     category_id = serializers.IntegerField(write_only=True)
 
     def create(self, validated_data):
