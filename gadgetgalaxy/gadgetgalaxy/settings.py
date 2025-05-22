@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'product.apps.ProductConfig',
     'django_bootstrap5',
     'accounts.apps.AccountsConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -131,6 +132,12 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 HOME_URL = '/'
 LOGIN_URL = '/accounts/login/'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ]
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
