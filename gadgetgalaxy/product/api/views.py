@@ -7,7 +7,7 @@ from .serlizer import ProductSerializer
 @api_view(['GET', 'POST'])
 def product_list_api(request):
     if request.method == 'GET':
-        products = Product.objects.fillter(is_deleted=False)
+        products = Product.objects.filter(is_deleted=False)
         serializer = ProductSerializer(products, many=True)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
     else:
