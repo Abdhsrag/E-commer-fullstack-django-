@@ -1,9 +1,12 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework import status
+from rest_framework import status, serializers
 from ..models import Product
+from category.models import Category
 from .serlizer import ProductSerializer
+from rest_framework.generics import CreateAPIView, RetrieveUpdateDestroyAPIView, ListAPIView
+
 
 @api_view(['GET', 'POST'])
 def product_list_api(request):
@@ -33,3 +36,27 @@ class ProductUpdateAPI(APIView):
             serializer.save()
             return Response({'msg': 'Product updated', 'data': serializer.data}, status=status.HTTP_200_OK)
         return Response({'msg': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class ProductGetIdUpdateDeleteAPI(RetrieveUpdateDestroyAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    lookup_field = 'pk'
+
+    def perform_update(self, serializer):
+        category_id = self.request.data.get('category_id')
+        if category_id:
+            try:
+                category = Category.objects.get(id=category_id)
+                serializer.save(category=category)
+                return
+            except Category.DoesNotExist:
+                raise serializers.ValidationError("Category with this ID does not exist.")
+
+        serializer.save()
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.is_deleted = True
+        instance.save()
+        return Response({'msg': 'Product deleted'}, status=status.HTTP_204_NO_CONTENT)
