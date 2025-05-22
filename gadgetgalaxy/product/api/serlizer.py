@@ -1,6 +1,6 @@
 from rest_framework import serializers
-from gadgetgalaxy.product.models import Product
-from gadgetgalaxy.category.models import Category
+from ..models import Product
+from category.models import Category
 
 class CatagorySerlizer(serializers.ModelSerializer):
     class Meta:
