@@ -6,6 +6,8 @@ from ..models import Product
 from category.models import Category
 from .serlizer import ProductSerializer
 from rest_framework.generics import CreateAPIView, RetrieveUpdateDestroyAPIView, ListAPIView
+from rest_framework.viewsets import ModelViewSet
+
 
 
 @api_view(['GET', 'POST'])
@@ -54,6 +56,39 @@ class ProductGetIdUpdateDeleteAPI(RetrieveUpdateDestroyAPIView):
                 raise serializers.ValidationError("Category with this ID does not exist.")
 
         serializer.save()
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.is_deleted = True
+        instance.save()
+        return Response({'msg': 'Product deleted'}, status=status.HTTP_204_NO_CONTENT)
+
+
+class ProductViewSet(ModelViewSet):
+    queryset = Product.objects.filter(is_deleted=False)
+    serializer_class = ProductSerializer
+
+    def perform_create(self, serializer):
+        category_id = self.request.data.get('category_id')
+        if category_id:
+            try:
+                category = Category.objects.get(id=category_id)
+                serializer.save(category=category)
+            except Category.DoesNotExist:
+                raise serializers.ValidationError("Category with this ID does not exist.")
+        else:
+            serializer.save()
+
+    def perform_update(self, serializer):
+        category_id = self.request.data.get('category_id')
+        if category_id:
+            try:
+                category = Category.objects.get(id=category_id)
+                serializer.save(category=category)
+            except Category.DoesNotExist:
+                raise serializers.ValidationError("Category with this ID does not exist.")
+        else:
+            serializer.save()
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
