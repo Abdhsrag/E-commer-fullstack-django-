@@ -105,3 +105,7 @@ def update_product(request, product_id):
 def product_detail(request, product_id):
     product = Product.objects.get(id=product_id)
     return render(request, 'product_detail.html', {'product': product})
+
+def soft_deleted_products_page(request):
+    products = Product.objects.filter(is_deleted=True)
+    return render(request, 'soft_deleted.html', {'products': products})

@@ -73,3 +73,8 @@ class ProductViewSet(ModelViewSet):
         instance.is_deleted = True
         instance.save()
         return Response({'msg': 'Product deleted'}, status=status.HTTP_204_NO_CONTENT)
+
+
+class SoftDeletedProductListAPI(ListAPIView):
+    queryset = Product.objects.filter(is_deleted=True)
+    serializer_class = ProductSerializer

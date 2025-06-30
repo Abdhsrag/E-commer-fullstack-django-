@@ -6,7 +6,13 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card shadow">
-                <div class="card-header bg-primary text-white">
+                <div class="card-header text-white"
+                style="
+    background: linear-gradient(90deg, #6a11cb, #2575fc);
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
                     <h3 class="card-title mb-0" style="color: white">Register</h3>
                 </div>
                 <div class="card-body">
@@ -14,7 +20,11 @@
                         {% csrf_token %}
                         {% bootstrap_form form %}
                         <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-primary btn-lg">Register</button>
+                            <button type="submit" class="btn btn-lg" style="
+    background: linear-gradient(90deg, #6a11cb, #2575fc);
+    color: white;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">Register</button>
                         </div>
                     </form>
                     <hr class="my-4">

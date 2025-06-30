@@ -1,0 +1,32 @@
+# Python bytecode files
+*.pyc
+*.pyo
+__pycache__/
+
+# Django migrations (optional)
+**/migrations/*.pyc
+**/migrations/__pycache__/
+
+# Environment files
+.env
+*.env
+
+# Virtual environments
+venv/
+env/
+
+# VS Code settings
+.vscode/
+
+# SQLite database
+*.sqlite3
+
+# Logs
+*.log
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Static files (optional if generated)
+staticfiles/

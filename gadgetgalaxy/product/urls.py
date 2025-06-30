@@ -1,6 +1,6 @@
 from . import views
 from django.urls import path, include
-from product.api.views import product_list_api, ProductUpdateAPI, ProductGetIdUpdateDeleteAPI, ProductViewSet
+from product.api.views import product_list_api, ProductUpdateAPI, ProductGetIdUpdateDeleteAPI, ProductViewSet, SoftDeletedProductListAPI
 from rest_framework.routers import DefaultRouter
 
 
@@ -19,5 +19,7 @@ urlpatterns = [
     path('soft_delete/<int:product_id>/', views.soft_delete_product.as_view(), name='soft_delete_product'),
     path('update_product/<int:product_id>/', views.update_product, name='update_product'),
     path('product_detail/<int:product_id>/', views.product_detail, name='product_detail'),
+    path('API/soft_deleted/', SoftDeletedProductListAPI.as_view(), name='soft_deleted_products_api'),
+path('soft_deleted/', views.soft_deleted_products_page, name='soft_deleted_products_page'),
     path('viewset/', include(router.urls)),
 ]
